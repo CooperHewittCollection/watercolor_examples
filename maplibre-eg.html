@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Watercolor Map Tiles with Open Layers</title>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css">
+    <script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+</head>
+<style>
+    #map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div id="map"></div>
+</body>
+<script>
+    const map = new maplibregl.Map({
+        container: 'map', // container id
+        style: {
+            'version': 8,
+            'sources': {
+                'watercolor-tiles': {
+                    'type': 'raster',
+                    'tiles': [
+                        'https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/{z}/{x}/{y}.jpg'
+                    ],
+                    'tileSize': 256,
+                    'attribution':
+                        'Map tiles by <a target="_top" rel="noopener" href="http://stamen.com">Stamen Design</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a target="_top" rel="noopener" href="http://openstreetmap.org">OpenStreetMap</a>, under <a target="_top" rel="noopener" href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>'
+                }
+            },
+            'layers': [
+                {
+                    'id': 'watercolor-tiles',
+                    'type': 'raster',
+                    'source': 'raster-tiles',
+                    'minzoom': 0,
+                    'maxzoom': 22
+                }
+            ]
+        },
+        center: [-74.5, 40], // starting position
+        zoom: 2 // starting zoom
+    });
+</script>
+
+</html>

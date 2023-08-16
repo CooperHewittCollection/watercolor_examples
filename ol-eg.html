@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using Watercolor Map Tiles with Open Layers</title>
+    <script src="https://cdn.jsdelivr.net/npm/ol@v7.5.1/dist/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.5.1/ol.css">
+    <style>
+        #map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+</body>
+<script>
+
+    const attributions =
+        '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
+
+    const watercolor = new ol.source.XYZ({
+        attributions: attributions,
+        url: 'https://watercolormaps.collection.cooperhewitt.org/tile/watercolor/{z}/{x}/{y}.jpg',
+        maxZoom: 20,
+        crossOrigin: '',
+    });
+
+    const map = new ol.Map({
+        layers: [
+            new ol.layer.Tile({
+                source: watercolor,
+            }),
+        ],
+        target: 'map',
+        view: new ol.View({
+            center: [0, 0],
+            zoom: 2,
+        }),
+    });
+</script>
+
+</html>
